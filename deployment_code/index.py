@@ -78,6 +78,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # Collects user input features into dataframe
 uploaded_file = st.sidebar.file_uploader("UPLOAD IMAGE FILE", type=["png","jpg","svg"])
 if uploaded_file is not None:
+    uploaded_file.seek(0)
     print("0")
 else:  
     def user_input_features():
@@ -104,7 +105,6 @@ else:
     st.write(result)
 
 if uploaded_file is not None:
-    uploaded_file.seek(0)
     ts = datetime.datetime.now().timestamp()
     file_name=str(ts)+'.png'
     image_location_and_name=current_path+ '/tempDir/'+str(ts)+'.png'
@@ -124,7 +124,8 @@ if uploaded_file is not None:
     result="""
     MLP model says that face is {}, with {:.2f} percent confidence.
     """.format(class_names[torch.argmax(score[0])], 100*score[0,torch.argmax(score[0])])
-    st.subheader    (result)
+    st.subheader(result)
+    uploaded_file.seek(0)
     st.image(uploaded_file, channels="BGR")
     
 else:
