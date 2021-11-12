@@ -58,7 +58,7 @@ class MLP(nn.Module):
 current_path = os.path.abspath("./")
 device = torch.device('cpu')
 mlp_model_path = current_path + "/model/mlp.pt"
-mlp_model = torch.load(mlp_model_path)
+mlp_model = torch.load(mlp_model_path,map_location=device)
 mlp_model = mlp_model.to(device)
 class_names = ['angry', 'disgusted', 'happy', 'sad', 'surprised']
 img_size = (32, 32)
