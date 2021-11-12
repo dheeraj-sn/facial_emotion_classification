@@ -103,7 +103,8 @@ else:
     """.format(class_names[torch.argmax(score[0])], 100*score[0,torch.argmax(score[0])])
     st.write(result)
 
-if uploaded_file is not None:    
+if uploaded_file is not None:
+    uploaded_file.seek(0)
     ts = datetime.datetime.now().timestamp()
     file_name=str(ts)+'.png'
     image_location_and_name=current_path+ '/tempDir/'+str(ts)+'.png'
